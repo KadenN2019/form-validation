@@ -10,6 +10,7 @@ function App(props) {
   const [Password, setPassword] = useState("");
   const [ConPassword, setConPassword] = useState("");
   const [Website, setWebsite] = useState("");
+
   //errors
   const [NameError, setNameError] = useState("");
   const [EmailError, setEmailError] = useState("");
