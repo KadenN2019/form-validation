@@ -4,12 +4,12 @@ import validator from 'validator'
 
 function App(props) {
   //original
-  const [Name, setName] = useState("");
-  const [Email, setEmail] = useState("");
-  const [Username, setUsername] = useState("");
+  const [Name, setName] = useState("ss");
+  const [Email, setEmail] = useState("ss@gmail.com");
+  const [Username, setUsername] = useState("ss");
   const [Password, setPassword] = useState("");
   const [ConPassword, setConPassword] = useState("");
-  const [Website, setWebsite] = useState("");
+  const [Website, setWebsite] = useState("https://www.facebook.com");
 
   //errors
   const [NameError, setNameError] = useState("");
@@ -22,14 +22,14 @@ function App(props) {
   function handleSubmit(e) {
     e.preventDefault();
     let err = false;
-
+// Name
     if (Name === "") {
         err = true
         setNameError("- Cannot Be Blank");
       }else{
         setNameError("")
       }
-
+// Email
     if (Email !== "") {
       if(!validator.isEmail(Email)){
         err = true;
@@ -41,7 +41,7 @@ function App(props) {
         err = true
         setEmailError("- Cannot Be Blank");
     }
-
+// Username
     if (Username !== "") {
         if(!validator.isAlphanumeric(Username)){
             err = true;
@@ -53,30 +53,34 @@ function App(props) {
         err = true
         setUsernameError("- Cannot Be Blank");
     }
-
-    if (Password !== "") {
-        if(!validator.isAlphanumeric(Password)){
-            err = true;
-            setPasswordError("- Not a Valid Password");
-        }else{
-            setPasswordError("")
-        }
-    } else {
+// Password
+    if(Password !== "" && ConPassword !== "" ){
+        if(!validator.isAscii(Password)){
+            err = true
+            setPasswordError("- Cannot Be blank")
+        }else if(!validator.isAscii(ConPassword)){
+            err = true
+            setConPasswordError("- Cannot Be blank")
+            }if(Password === ConPassword){
+                setPasswordError("")
+                setConPasswordError("")
+            }else if(Password !== ConPassword){
+                err = true
+                setPasswordError("- Doesn't Match Password")
+                setConPasswordError("- Doesn't Match Password")
+            }
+     }else if(Password !== "" && ConPassword === ""){
+            err = true
+            setConPasswordError("- Cannot Be blank")
+    }else if(Password === "" && ConPassword !== ""){
         err = true
-        setPasswordError("- Cannot Be Blank");
+        setPasswordError("- Cannot Be blank")
+    }else {
+        err = true
+        setPasswordError("- Cannot Be blank")
+        setConPasswordError("- Cannot Be blank")
     }
-
-    if (ConPassword !== "") {
-      if(ConPassword !== Password){
-        err = true;
-        setConPasswordError("- Doesn't Match 'Password'");
-      }else{
-        setConPasswordError("")
-      }
-    } else {
-      setConPasswordError("- Cannot Be Blank");
-    }
-
+// Website
     if (Website !== "") {
       if(!validator.isURL(Website)){
         err = true;
