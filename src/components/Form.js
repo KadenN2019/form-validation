@@ -4,13 +4,12 @@ import validator from 'validator'
 
 function App(props) {
   //original
-  const [Name, setName] = useState("ss");
-  const [Email, setEmail] = useState("ss@gmail.com");
-  const [Username, setUsername] = useState("ss");
+  const [Name, setName] = useState("");
+  const [Email, setEmail] = useState("");
+  const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [ConPassword, setConPassword] = useState("");
-  const [Website, setWebsite] = useState("https://www.facebook.com");
-
+  const [Website, setWebsite] = useState("");
   //errors
   const [NameError, setNameError] = useState("");
   const [EmailError, setEmailError] = useState("");
@@ -69,7 +68,7 @@ function App(props) {
                 setPasswordError("- Doesn't Match Password")
                 setConPasswordError("- Doesn't Match Password")
             }
-     }else if(Password !== "" && ConPassword === ""){
+    }else if(Password !== "" && ConPassword === ""){
             err = true
             setConPasswordError("- Cannot Be blank")
     }else if(Password === "" && ConPassword !== ""){
